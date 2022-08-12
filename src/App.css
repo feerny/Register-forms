@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+
+}
+
+nav h1{
+    color: white;
+    margin-left: 7rem;
+
+}
+
+nav div {
+    margin-right: 5rem;
+}
+
+nav div a{
+    transition: all .6s ease;
+    margin-left: 3rem;
+    text-decoration: none;
+    color: white;
+    border: 2px solid black;
+    
+}
+
+nav div a:hover{
+    transition: all .6s ease;
+    margin-left: 3rem;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+   
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    height: 69px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+form input{
+    margin: 2rem 0px 2rem 0px;
+    padding: 3px;
+    font-size: 17px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.input-password{
+    margin-left: 2.3rem;
+    display: flex;
+}
+
+.button-enviar{
+    transition: all .5s ease;
+    margin: 2rem;
+    background-color: white;
+    padding: 3px;
+    font-size: 17px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+
+.button-enviar:hover{
+    transition: all .5s ease;
+    cursor: pointer;
+    margin: 2rem;
+    color: white;
+    background-color: black;
+    padding: 3px;
+    font-size: 17px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.button-show{
+    margin-left: 10px;
+    font-size: 25px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+form p{
+    color: red;
+}
+
+
+
+
+
