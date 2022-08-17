@@ -1,9 +1,9 @@
 import React from 'react';
-import { BsEyeFill } from "react-icons/bs";
+import { BsEyeFill,BsEyeSlashFill } from "react-icons/bs";
 
 
 
-function Form(props) {
+function Form(props) { 
     return (
         <div>
             <form onSubmit={props.submit} className="form">
@@ -13,11 +13,11 @@ function Form(props) {
                 <p id='valiEmail'></p>
                 <div className='input-password'>
                     <input required  onChange={props.onChange} type={props.shown ? 'text' : 'password'}value={props.password}placeholder='password'  />
-                    <button className='button-show' onClick={props.switchShown}><BsEyeFill /></button>
+                    <button className='button-show' onClick={props.switchShown}>{props.shown? <BsEyeFill />:<BsEyeSlashFill />}</button>
                </div>
                <div className='input-password'>
                     <input required  onChange={props.onChange2} type={props.shown ? 'text' : 'password'}value={props.confpassword}placeholder='Confirm password'  />
-                    <button className='button-show' onClick={props.switchShown}><BsEyeFill /></button> 
+                    <button className='button-show' onClick={props.switchShown}>{props.shown? <BsEyeFill />:<BsEyeSlashFill />}</button> 
                </div>
                <p id='validPassword'></p>
                 <input id='buttonSend' disabled className='button-enviar' type="submit" /> 
