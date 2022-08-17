@@ -15,9 +15,9 @@ function Form(props) {
                     <input required  onChange={props.onChange} type={props.shown ? 'text' : 'password'}value={props.password}placeholder='password'  />
                     <button className='button-show' onClick={props.switchShown}>{props.shown? <BsEyeFill />:<BsEyeSlashFill />}</button>
                </div>
-               <div className='input-password'>
-                    <input required  onChange={props.onChange2} type={props.shown ? 'text' : 'password'}value={props.confpassword}placeholder='Confirm password'  />
-                    <button className='button-show' onClick={props.switchShown}>{props.shown? <BsEyeFill />:<BsEyeSlashFill />}</button> 
+               <div className='input-validpassword'>
+                    <input required  onChange={props.onChange2} type='password'value={props.confpassword}placeholder='Confirm password'  />
+                    
                </div>
                <p id='validPassword'></p>
                 <input id='buttonSend' disabled className='button-enviar' type="submit" /> 

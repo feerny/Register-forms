@@ -71,6 +71,10 @@ form input{
     display: flex;
 }
 
+.input-validpassword{
+    margin-left: 5px;
+}
+
 .button-enviar{
     transition: all .5s ease;
     margin: 2rem;
