@@ -1,11 +1,28 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import Form from '../ui/Form'
+import FormLogin from '../ui/FormLogin'
+import { Routes,Route } from 'react-router-dom';
 
 
 
 
 
 function Body() {
+
+    const axios = require('axios');
+    axios.get('https://backend-edw.herokuapp.com/usuario/13')
+    .then(function (response) {
+        // handle success
+        //console.log(response);
+       response.data.map((data => console.log(data)));
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
 
     //inicio de constantes
     const [username, setusername] = useState('');
@@ -27,35 +44,8 @@ function Body() {
 
 
 
-    // inicio de las validaciones con useEffect
 
-    //validaciones username
-    useEffect(() => {
-        validUsername.indexOf('`')!== -1 || validUsername.indexOf('.')!== -1 || validUsername.indexOf('@')!== -1 || validUsername.indexOf('!')!== -1 || validUsername.indexOf('%')!== -1 || validUsername.indexOf('$')!== -1 || /\s/.test(validUsername)?
-         document.getElementById('valiUsername').textContent='USUARIO INVALIDO: solo letras o numeros, sin espacios minimo 3 caracteres y maximo 20' : 
-         document.getElementById('valiUsername').textContent='';
-    }, [validUsername])
-
-    //validaciones de email
-    useEffect(() => {
-        validemail.indexOf('.')=== -1 || validemail.indexOf('@')=== -1 || /\s/.test(validemail)?
-         document.getElementById('valiEmail').textContent='Email invalido' : 
-         document.getElementById('valiEmail').textContent='';
-    }, [validemail])
-
-    //validaciones password
-    
-    useEffect(() => {
-        confpassword===password?  document.getElementById('buttonSend').removeAttribute('disabled'):document.getElementById('buttonSend').setAttribute('disabled','true')
-    }, [confpassword,password])
-
-    useEffect(() => {
-        confpassword===password?
-         document.getElementById('validPassword').textContent='' : 
-         document.getElementById('validPassword').textContent='LA CONTRASEÑA NO COINCIDE';
-    }, [confpassword,password])
-    
-    //fin de la validaciones con useEffects
+   
 
     //evento que se ejecuta al enviar el formulario
     const submit=(event)=>{
@@ -63,37 +53,54 @@ function Body() {
             console.log("error");
         }else{
             alert(`registro exitoso ${username}`);
-            XMLHttpRequestUpload()
+            setusername('');
+            setemail('');
+            setPassword('');
+            setconfpassword('');
 
         }
         event.preventDefault()
         setvalidUsername(username);
         setvalidemail(email);
-        setusername('');
-        setemail('');
-        setPassword('');
-        setconfpassword('');
+
     }
 
 
 
     return (
         <div>
-            <Form
-            //envio de props
-            password={password}
-            confpassword={confpassword}
-            username={username}
-            email={email}
-            onChange={onChange}
-            onChange2={onChange2}
-            onChange3={onChange3}
-            onChange4={onChange4}
-            switchShown={switchShown}
-            shown={shown} 
-            submit={submit}
-            //fin envio de props
-            />
+
+            <Routes>
+                <Route path="/" element={
+                    <Form
+                    //envio de props
+                    validUsername={validUsername}
+                    validemail={validemail}
+                    confpassword={confpassword}
+                    password={password}
+                    username={username}
+                    email={email}
+                    onChange={onChange}
+                    onChange2={onChange2}
+                    onChange3={onChange3}
+                    onChange4={onChange4}
+                    switchShown={switchShown}
+                    shown={shown} 
+                    submit={submit}
+                    //fin envio de props
+                    />
+                 }/>
+                <Route path="/Login" element={
+                    <FormLogin
+                    //envio de props
+
+                    //fin envio de props
+                    />
+                 }/>
+
+
+            </Routes>   
+
         </div>
     );
 }
