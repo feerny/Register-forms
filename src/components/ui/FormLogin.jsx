@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function FormLogin(props) { 
     return (
         <div>
-            <form onSubmit={props.submit} className="form">
+            <form onSubmit={props.submit} className="formLogin">
                 <h2>ingresa</h2>
                 <input required id='email' onChange={props.onChange4} value={props.email} type="email" placeholder='Email' />
                 <p id='valiEmail'></p>

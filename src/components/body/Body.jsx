@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Form from '../ui/Form'
 import FormLogin from '../ui/FormLogin'
 import { Routes,Route } from 'react-router-dom';
+import axios from 'axios'
 
 
 
@@ -9,23 +10,30 @@ import { Routes,Route } from 'react-router-dom';
 
 function Body() {
 
-    const axios = require('axios');
-    axios.get('https://backend-edw.herokuapp.com/usuario/13')
-    .then(function (response) {
-        // handle success
-        //console.log(response);
-       response.data.map((data => console.log(data)));
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-    .then(function () {
-        // always executed
-    });
+
+    const postApi=()=>{
+        axios.post('https://backend-edw.herokuapp.com/usuario',{
+            "username":username,
+            "password":password,
+            "name":username
+        })
+        .then(function (response) {
+            // handle success
+            console.log(response.data.Message);
+            setmessage(response.data.Message);
+           //response.data.map((data => console.log(data)));
+        })
+        .catch(function (error) {
+            // handle error
+            alert(error.message+" sin conexion");
+        });
+    }
+
+
 
     //inicio de constantes
     const [username, setusername] = useState('');
+    const [message, setmessage] = useState('')
     const [validUsername, setvalidUsername] = useState('');
     const [email, setemail] = useState('');
     const [validemail, setvalidemail] = useState('.@');
@@ -52,7 +60,7 @@ function Body() {
         if ((username.indexOf('`')!== -1 || username.indexOf('.')!== -1 || username.indexOf('@')!== -1 || username.indexOf('!')!== -1 || username.indexOf('%')!== -1 || username.indexOf('$')!== -1 || /\s/.test(username)) || (email.indexOf('.')=== -1 || email.indexOf('@')=== -1 || /\s/.test(email))) {
             console.log("error");
         }else{
-            alert(`registro exitoso ${username}`);
+            postApi()
             setusername('');
             setemail('');
             setPassword('');
@@ -62,6 +70,7 @@ function Body() {
         event.preventDefault()
         setvalidUsername(username);
         setvalidemail(email);
+
 
     }
 
@@ -75,6 +84,8 @@ function Body() {
                     <Form
                     //envio de props
                     validUsername={validUsername}
+                    message={message}
+                    setmessage={setmessage}
                     validemail={validemail}
                     confpassword={confpassword}
                     password={password}
@@ -93,7 +104,7 @@ function Body() {
                 <Route path="/Login" element={
                     <FormLogin
                     //envio de props
-
+                    submit={submit}
                     //fin envio de props
                     />
                  }/>

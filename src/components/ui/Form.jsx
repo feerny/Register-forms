@@ -28,6 +28,21 @@ function Form(props) {
         props.confpassword===props.password?  document.getElementById('buttonSend').removeAttribute('disabled'):document.getElementById('buttonSend').setAttribute('disabled','true')
     }, [props.confpassword,props.password])
 
+    //envio mensaje 
+    useEffect(() => {
+        if ( props.message==="Usuario con ese username ya esta registrado" ) {
+            document.getElementById('valiUsername').textContent=`${props.message}`
+            props.setmessage("")
+        }else if(props.message==="Usuario Registrado con exito"){
+            alert(props.message)
+            props.setmessage("")
+        }
+
+        
+    }, [ props.message]);
+
+
+
     useEffect(() => {
         props.confpassword===props.password?
          document.getElementById('validPassword').textContent='' : 
@@ -40,7 +55,7 @@ function Form(props) {
             
             <form onSubmit={props.submit} className="form">
                 <h2>Registrate</h2>
-                <input required id='username' onChange={props.onChange3} value={props.username} minLength="4" maxLength="8" type="text" placeholder='Username'/>
+                <input required id='username' onChange={props.onChange3} value={props.username} minLength="3" maxLength="20" type="text" placeholder='Username'/>
                 <p id='valiUsername'></p>
                 <input required id='email' onChange={props.onChange4} value={props.email} type="email" placeholder='Email' />
                 <p id='valiEmail'></p>

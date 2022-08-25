@@ -60,6 +60,15 @@ form{
 
 }
 
+.formLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3.1rem;
+    margin-bottom: 4rem;
+}
+
 form input{
     margin: 2rem 0px 2rem 0px;
     padding: 3px;
