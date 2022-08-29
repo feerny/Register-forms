@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import Form from '../ui/Form'
 import FormLogin from '../ui/FormLogin'
-import { Routes,Route } from 'react-router-dom';
+import { Routes,Route,useNavigate   } from 'react-router-dom';
 import axios from 'axios'
 
 
@@ -9,7 +9,7 @@ import axios from 'axios'
 
 
 function Body() {
-
+    let navigate = useNavigate();
 
     const postApi=()=>{
         axios.post('https://backend-edw.herokuapp.com/usuario',{
@@ -52,7 +52,9 @@ function Body() {
 
 
 
-
+    function handleClick() {
+        navigate('/')
+      }
    
 
     //evento que se ejecuta al enviar el formulario
@@ -60,16 +62,17 @@ function Body() {
         if ((username.indexOf('`')!== -1 || username.indexOf('.')!== -1 || username.indexOf('@')!== -1 || username.indexOf('!')!== -1 || username.indexOf('%')!== -1 || username.indexOf('$')!== -1 || /\s/.test(username)) || (email.indexOf('.')=== -1 || email.indexOf('@')=== -1 || /\s/.test(email))) {
             console.log("error");
         }else{
-            postApi()
+            postApi();
             setusername('');
             setemail('');
             setPassword('');
-            setconfpassword('');
+            setconfpassword('');     
 
         }
         event.preventDefault()
         setvalidUsername(username);
         setvalidemail(email);
+
 
 
     }
@@ -80,11 +83,12 @@ function Body() {
         <div>
 
             <Routes>
-                <Route path="/" element={
+                <Route path="/register" element={
                     <Form
                     //envio de props
                     validUsername={validUsername}
                     message={message}
+                    handleClick={handleClick}
                     setmessage={setmessage}
                     validemail={validemail}
                     confpassword={confpassword}
@@ -101,7 +105,7 @@ function Body() {
                     //fin envio de props
                     />
                  }/>
-                <Route path="/Login" element={
+                <Route path="/" element={
                     <FormLogin
                     //envio de props
                     submit={submit}

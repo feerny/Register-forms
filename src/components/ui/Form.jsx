@@ -36,6 +36,7 @@ function Form(props) {
         }else if(props.message==="Usuario Registrado con exito"){
             alert(props.message)
             props.setmessage("")
+            props.handleClick()
         }
 
         
@@ -68,7 +69,7 @@ function Form(props) {
                </div>
                <p id='validPassword'></p>
                 <input id='buttonSend' value="register" disabled className='button-enviar' type="submit" /> 
-                <p className='cuenta'>ya tienes cuenta?</p><Link className='ul' to="/login">ingresa</Link> 
+                <p className='cuenta'>ya tienes cuenta?</p><Link className='ul' to="/">ingresa</Link> 
             </form>
             
             

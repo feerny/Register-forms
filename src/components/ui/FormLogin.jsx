@@ -18,7 +18,7 @@ function FormLogin(props) {
 
                <p id='validPassword'></p>
                 <input id='buttonSend' value="login" disabled className='button-enviar' type="submit" /> 
-                <p className='cuenta'>no tienes cuenta?</p><Link className='ul' to="/">registrate</Link> 
+                <p className='cuenta'>no tienes cuenta?</p><Link className='ul' to="/register">registrate</Link> 
             </form>
         </div>
     );
