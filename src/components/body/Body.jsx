@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import Form from '../ui/Form'
 import FormLogin from '../ui/FormLogin'
+import Home from '../ui/Home'
 import { Routes,Route,useNavigate   } from 'react-router-dom';
 import axios from 'axios'
 
@@ -31,7 +32,7 @@ function Body() {
 
 
 
-    //inicio de constantes
+    //inicio de constantes register
     const [username, setusername] = useState('');
     const [message, setmessage] = useState('')
     const [validUsername, setvalidUsername] = useState('');
@@ -47,6 +48,15 @@ function Body() {
     const [shown, setShown] = useState(false);
     const switchShown = (event) => {setShown(!shown)
         event.preventDefault()};
+    //fin de constantes
+
+    //inicio de constantes login
+
+    const [user, setuser] = useState("")
+    const onChangeUser = ({ currentTarget }) => setuser(currentTarget.value);
+    const [passworduser, setpassworduser] = useState("")
+    const onChangePassword = ({ currentTarget }) => setpassworduser(currentTarget.value);
+
     //fin de constantes
 
 
@@ -72,8 +82,44 @@ function Body() {
         event.preventDefault()
         setvalidUsername(username);
         setvalidemail(email);
+    }
+
+    const getApi=()=>{
+        axios.get('https://backend-edw.herokuapp.com/usuarios')
+          .then(function (response) {
+            response.data.map(data=>{
+                if (user===data[1] && passworduser===data[3]) {
+                    console.log("usuario encontrado");
+                    navigate('/home')
+                    
+                }else{
+                    if (user===data[1]) {
+                        console.log("usuario o contraseña errado");
+                    } else if (user!==data[1]) {
+                        console.log("usuario no existe");
+                    }
+                }
+
+                return console.log("fin");
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert(error.message+" sin conexion");
+          });
+    }
 
 
+
+    const submitLogin=(event)=>{
+        if ((user.indexOf('`')!== -1 || user.indexOf('.')!== -1 || user.indexOf('@')!== -1 || user.indexOf('!')!== -1 || user.indexOf('%')!== -1 || user.indexOf('$')!== -1 || /\s/.test(user))) {
+            console.log("error");
+        }else{
+            getApi();
+ 
+
+        }
+        event.preventDefault()
 
     }
 
@@ -108,7 +154,21 @@ function Body() {
                 <Route path="/" element={
                     <FormLogin
                     //envio de props
+                    submitLogin={submitLogin}
+                    onChangePassword={onChangePassword}
+                    passworduser={passworduser}
+                    user={user}
+                    onChangeUser={onChangeUser}
                     submit={submit}
+                    switchShown={switchShown}
+                    shown={shown} 
+                    //fin envio de props
+                    />
+                 }/>
+                    <Route path="/home" element={
+                    <Home
+                    //envio de props
+
                     //fin envio de props
                     />
                  }/>
